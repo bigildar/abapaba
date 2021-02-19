@@ -172,6 +172,22 @@ def get_quantity_none(conn,):
     for i in f:
         print(i)
 
+# @ensure_connection
+# def get_100_balance(conn,):
+#     c = conn.cursor()
+#     c.execute('''
+#         select product.name, sum(goods.quantity), warehause.name
+#         from brand, product, goods, warehause
+#         where goods.productId = product.id and 
+#         product.brandId = brand.id and 
+#         goods.warehauseId = warehause.id and
+#         goods.quantity is not null
+#         group by product.name, warehause.name
+#         ''')
+#     f=c.fetchall()
+#     for i in f:
+#         print(i)
+
 if __name__ == '__main__':
     '''
     Тест
@@ -179,12 +195,10 @@ if __name__ == '__main__':
     from random import choice 
     from random import randint
     
-    brands=['Газпром','Лукойл', 'Пятерочка','Магнит','ММК','Лада',
-            'Apple','Мишлен','Amazon','Tesla','Toyota','BMW']
-    countries=['Россия', 'США', 'Германия']
-    products=['Масло','Телефон','Двигатель','Доски','Хлеб','Мука',
-             'Рельса','Молоко','Уголь','Ложка','Антенна','Бумага']
-    warehauses=['Москва', 'Санкт-Петербург', 'Челябниск', 'Краснодар']
+    brands=['Газпром','Лукойл', 'Пятерочка']
+    countries=['Россия', 'США']
+    products=['Масло','Телефон']
+    warehauses=['Москва', 'Санкт-Петербург','Краснодар']
 
 
     init_db(force=True)
@@ -195,15 +209,21 @@ if __name__ == '__main__':
             country=choice(countries), 
             name=choice(products), 
             warename=choice(warehauses), 
-            quantity=randint(0,2)*100)
+            quantity=randint(0,1)*10)
 
     get_table()
     print('*******************')
     get_brand_balance(country='США')
     print('****')
     get_brand_balance(country='Россия')
-    print('*****')
-    get_brand_balance(country='Германия')
     print('*******************')
     get_quantity_none()
+
+
+
+
+
+
+
+
 
